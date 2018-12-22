@@ -1,0 +1,50 @@
+.THIS .changeMe{
+    display: "";
+    color:red;
+    background-color:yellow;
+}
+.THIS .ul_list{
+    padding:10px;
+}
+.THIS .slds-page-header  {
+    border-radius: 0px;
+}
+.THIS .RemoveMe{
+    display: "none";
+}
+.THIS .bodyPart{
+    background-color:white;
+    padding:10px 10px 10px 10px;
+}
+.THIS .trow{
+	height:35px;
+}
+.THIS .thdr{
+    padding-top: 1.5%;
+    padding-left: 1%;
+}
+.THIS .searchResult{
+    height:200px;
+    overflow-y: scroll;
+    border-radius:3px;
+}
+.THIS .hdr_container {
+    padding-top: 5%;
+}
+.THIS #settingIcon{
+    float:right;
+}
+.THIS #settingDrpdwn{
+    
+    position: relative;
+    float: right;
+    right: 22%;
+    top: -2px;
+}
+.THIS .menu{
+    width: 194px;
+    padding: 10px;
+}
+.THIS .slds-page-header{
+    border-radius:none;
+}
