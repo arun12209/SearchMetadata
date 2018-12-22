@@ -12,7 +12,7 @@ public class searchMetadataCntrl {
         HttpRequest req = new HttpRequest();
         String session_id;
         if(!test.isRunningTest()){
-            session_id = Utils.getSessionIdFromVFPage(Page.SessionIdPage);
+            session_id = UtilsClass.getSessionIdFromVFPage(Page.SessionIdPage);
         }
         system.debug('Session ID: ' +session_id);
         req.setHeader('Authorization', 'Bearer ' + session_id);
