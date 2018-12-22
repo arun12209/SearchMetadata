@@ -1,0 +1,98 @@
+<aura:component controller="searchMetadataCntrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="Result" type="Object"/>
+    <aura:attribute name="metadataType" type="string[]"/>
+    <aura:attribute name="selectedMetadata" type="string"/>
+    <aura:attribute name="searchKeyword" type="string"/>
+    <aura:attribute name="unFilteredResult" type="object"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="isApexType" type="boolean" default="false"/>
+    <aura:attribute name="searchPlaceHolder" type="string"/>
+    <aura:attribute name="TotalRecReturned" type="Integer"/>
+    <aura:attribute type="String" name="headerBgColor" /> 
+    <aura:attribute type="String" name="bodyBgColor" /> 
+    <aura:attribute name="headerTextColor" type="string"/>
+    <aura:attribute name="bodyTextColor" type="string"/>
+    <aura:attribute name="showSettings" type="boolean" default="false"/>
+    <div class="slds">  
+        <div class="slds-page-header slds-theme_shade slds-theme_alert-texture " style="{! 'background-color:' + v.headerBgColor }">
+            
+            <span style="{! 'color:' + v.headerTextColor }">Metadata Search</span>
+            
+            <!--<a href="" onclick="{!c.toggleSettings}" id="settingIcon">
+                <lightning:icon iconName="utility:settings" alternativeText="setting" size="xx-small"/>
+            </a>-->
+        </div>
+        <!-- Starting Page-->
+        <div>
+        </div>
+        <!--End-->
+        <div class="bodyPart" style="{! 'background-color:' + v.bodyBgColor }">
+            <div style="{! 'color:' + v.bodyTextColor }">
+                <lightning:select name="selectItem" label="Select an item" onchange="{!c.OnSelectChange}">
+                    <aura:iteration items="{!v.metadataType}" var="m">
+                        <option value="{!m}" label="{!m}" />
+                    </aura:iteration>
+                </lightning:select>
+                <lightning:input label="Search" placeholder="{!v.searchPlaceHolder}" value="{!v.searchKeyword}" onkeyup="{!c.SearchMethod}"></lightning:input>
+                <br/>
+                <aura:if isTrue="{!v.Spinner}">
+                    <div aura:id="spinnerId" class="slds-spinner_container">
+                        <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.Result !=null}">
+                    <div class="slds-table--header-fixed_container hdr_container" style=" ">
+                        <div class="searchResult">
+                            <table class="slds-table slds-table--bordered slds-max-medium-table_stacked-horizontal slds-table--header-fixed" aura:id="myTable">
+                                
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate slds-cell-fixed thdr" title="Name">Name</div>
+                                        </th>
+                                        <th class="">
+                                            <div class="slds-truncate slds-cell-fixed thdr" title="ID">ID</div>
+                                        </th>
+                                        <aura:if isTrue="{!v.isApexType}">
+                                            <th class="slds-cell-shrink" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed thdr" title="Type">Type</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed thdr" title="NumLines Covered">Lines Cov.</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-truncate slds-cell-fixed thdr" title="NumLines Uncovered">Lines Uncov.</div>
+                                            </th>
+                                        </aura:if>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <aura:iteration items="{!v.Result}" var="r">
+                                        <tr  class="slds-hint-parent trow" >
+                                            <td class="slds-cell-shrink" data-label="Select Row"><a aura:id="trow" href="" id="{!r.Id}" onclick="{!c.navigate}">{!r.Name}</a></td>
+                                            <td class="slds-cell-shrink" data-label="Select Row">{!r.Id}</td>
+                                            <td class="slds-cell-shrink" data-label="Select Row">{!r.Type}</td>
+                                            <td class="slds-cell-shrink" data-label="Select Row">{!r.NumLinesCovered}</td>
+                                            <td class="slds-cell-shrink" data-label="Select Row">{!r.NumLinesUncovered}</td>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    <br/>
+                    <p> Total {!v.TotalRecReturned} Records Returned.</p>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+</aura:component>
