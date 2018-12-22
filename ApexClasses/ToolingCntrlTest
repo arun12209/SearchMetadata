@@ -1,0 +1,38 @@
+@isTest
+public class ToolingCntrlTest {
+  @istest
+    public static void Test1(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('ApexClass & ApexTrigger');
+    }
+    @istest
+    public static void Test2(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('ValidationRule');
+    }
+    @istest
+    public static void Test3(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('WorkflowRule');
+    }
+    @istest
+    public static void Test4(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('Email Template');
+    }
+    @istest
+    public static void Test5(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('Static Resource');
+    }
+    @istest
+    public static void Test6(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('Documents');
+    }
+    @istest
+    public static void Test7(){
+        Test.setMock(HttpCalloutMock.class, new ToolingCntrlHttpMock());
+        searchMetadataCntrl.GetMetaData('Visualforce Component');
+    }
+}
